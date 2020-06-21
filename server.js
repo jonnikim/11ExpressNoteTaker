@@ -34,7 +34,6 @@ app.post("/api/notes", function (req, res) {
   for (let i = 0; i < database.length; i++) {
     newNote.id = i + 1;
   }
-  console.log(newNote);
   database.push(newNote);
   fs.readFile("./db/db.json", function (err, data) {
     const json = JSON.parse(data);
@@ -47,15 +46,20 @@ app.post("/api/notes", function (req, res) {
   });
   res.json(true);
 });
-
-app.delete("/api/notes/:id", function (req, res) {
-  const target = req.params.id;
-  console.log(target);
-  // fs.readFile("./db/db.json", function (err, data) {
-  //   console.log(req.params.id);
-  //   console.log(data);
-  // });
+app.delete("/api/notes/:id", (req, res) => {
+  fs.readFile("./db/db.json", (err, data) => {
+    if (err) throw err;
+    let arr = JSON.parse(data);
+    let deletedArray = arr.filter((x) => x.id != req.params.id);
+    let json = JSON.stringify(deletedArray);
+    res.json(database);
+    fs.writeFile("./db/db.json", json, (err, data) => {
+      if (err) throw err;
+      console.log("Note Succesfully deleted from Json File");
+    });
+  });
 });
+
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function () {
