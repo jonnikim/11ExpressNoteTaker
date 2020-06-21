@@ -30,9 +30,15 @@ app.get("*", function (req, res) {
 });
 
 app.post("/api/notes", function (req, res) {
+  let newNote = req.body;
+  for (let i = 0; i < database.length; i++) {
+    newNote.id = i + 1;
+  }
+  console.log(newNote);
+  database.push(newNote);
   fs.readFile("./db/db.json", function (err, data) {
     const json = JSON.parse(data);
-    json.push(req.body);
+    json.push(newNote);
 
     fs.writeFile("./db/db.json", JSON.stringify(json), function (err) {
       if (err) throw err;
@@ -42,7 +48,14 @@ app.post("/api/notes", function (req, res) {
   res.json(true);
 });
 
-app.delete;
+app.delete("/api/notes/:id", function (req, res) {
+  const target = req.params.id;
+  console.log(target);
+  // fs.readFile("./db/db.json", function (err, data) {
+  //   console.log(req.params.id);
+  //   console.log(data);
+  // });
+});
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function () {
