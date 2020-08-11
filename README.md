@@ -44,7 +44,7 @@ Notable Technologies Used:
 [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/code_of_conduct.md)
 
 ## License 
-[MIT](https://github.com/jonnikim/18PWA-BudgetTracker/blob/master/LICENSE) | Copyright © 2020 Jonathan Kim
+[MIT](https://github.com/jonnikim/11ExpressNoteTaker/blob/master/LICENSE) | Copyright © 2020 Jonathan Kim
 
 ## Questions  
 Have questions? Contact me at:
